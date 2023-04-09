@@ -4,14 +4,14 @@ Rapidly generate When2Meet forms without ever leaving your dev environment. Buil
 
 ![Animated GIF making a demonstration of a questionnaire created with this library. You can replay this recording in your terminal with asciinema play command - asciinema play ./assets/expense_tracker.cast](./demo/W2M%20Demo.gif)
 
-##Installation
+## Installation
 Install using Cargo:
 
 ```
 cargo install w2m
 ```
 
-##Usage
+## Usage
 To generate a When2Meet:
 
 ```
@@ -26,7 +26,7 @@ Answer the prompts for:
 - Start Date
 - End Date
 
-##Trivia
+## Trivia
 
 - When2Meet doesn't have a public API, but it was extremely easy to reverse engineer.
 - The API actually has no bound for the date range, so it's possible to create a year-long When2Meet. This isn't possible from the website, which restricts the range to one month. For this reason, the CLI allows for any date range.
