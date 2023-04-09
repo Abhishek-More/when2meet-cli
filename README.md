@@ -5,13 +5,15 @@ Rapidly generate When2Meet forms without ever leaving your dev environment. Buil
 ![Animated GIF making a demonstration of a questionnaire created with this library. You can replay this recording in your terminal with asciinema play command - asciinema play ./assets/expense_tracker.cast](./demo/W2M%20Demo.gif)
 
 ## Installation
+
 Install using Cargo:
 
 ```
-cargo install w2m
+cargo install when2meet-cli
 ```
 
 ## Usage
+
 To generate a When2Meet:
 
 ```
