@@ -1,7 +1,21 @@
 [package]
-name = "w2m"
+name = "When2Meet-CLI"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+authors = ["Abhishek More <abhimore74@gmail.com>"]
+homepage = "https://liqr.vercel.app"
+repository = "https://github.com/Abhishek-More/when2meet-cli"
+readme = "README.md"
+keywords = ["when2meet", "schedule", "productivity", "meeting", "planner"]
+categories =["command-line-utilities"]
+description = """
+A lightweight CLI to rapidly generate When2Meet Forms 
+"""
+
+[[bin]]
+name = "w2m"
+path = "src/main.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
