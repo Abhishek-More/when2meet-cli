@@ -4,7 +4,6 @@ version = "0.1.1"
 edition = "2021"
 license = "MIT"
 authors = ["Abhishek More <abhimore74@gmail.com>"]
-homepage = "https://liqr.vercel.app"
 repository = "https://github.com/Abhishek-More/when2meet-cli"
 readme = "README.md"
 keywords = ["when2meet", "schedule", "productivity", "meeting", "planner"]
