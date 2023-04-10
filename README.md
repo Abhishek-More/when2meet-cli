@@ -9,7 +9,7 @@ Rapidly generate When2Meet forms without ever leaving your dev environment. Buil
 Install using Cargo:
 
 ```
-cargo install when2meet-cli
+cargo install When2Meet-CLI
 ```
 
 ## Usage
