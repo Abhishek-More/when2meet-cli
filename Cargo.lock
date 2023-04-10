@@ -1908,7 +1908,7 @@ dependencies = [
 
 [[package]]
 name = "when2meet-cli"
-version = "0.1.0"
+version = "0.1.2"
 dependencies = [
  "chrono",
  "clap",
