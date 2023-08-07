@@ -25,6 +25,7 @@ Answer the prompts for:
 - Title
 - Start Time
 - End Time
+- Time Zone (optional)
 - Start Date
 - End Date
 
