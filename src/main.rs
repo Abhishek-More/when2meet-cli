@@ -1,7 +1,7 @@
-use chrono::{NaiveDate};
+use chrono::NaiveDate;
 use inquire::{
-    error::{InquireResult},
-    required, CustomType, DateSelect, Text,
+    error::InquireResult,
+    required, CustomType, DateSelect, Select, Text,
     validator::Validation,
 };
 use reqwest::blocking::multipart;
@@ -25,6 +25,12 @@ fn main() -> InquireResult<()> {
         .with_error_message("Please enter a valid number between 0-23")
         .with_help_message("The latest hour you can meet in (0-23)")
         .prompt()?;
+
+    let (tz_vec, local_tz_index) = get_tz_data();
+    let time_zone = Select::new("Time Zone:", tz_vec)
+        .with_starting_cursor(local_tz_index)
+        .with_help_message("Time zone for the start and end times, or ESC for UTC")
+        .prompt_skippable()?;
 
     let start_date = DateSelect::new("Start Date")
         .with_validator(|d: NaiveDate| {
@@ -60,6 +66,7 @@ fn main() -> InquireResult<()> {
         end_date.to_string(),
         start_time.to_string(), 
         end_time.to_string(),
+        time_zone,
     );
 
     Ok(())
@@ -71,15 +78,20 @@ fn create_when2meet(
     end_date: String,
     start_time: String,
     end_time: String,
+    time_zone: Option<String>,
 ) {
     let date_range = get_date_range(start_date, end_date);
 
-    let form = multipart::Form::new()
+    let mut form = multipart::Form::new()
     .text("NewEventName", name)
     .text("DateTypes", "SpecificDates")
     .text("PossibleDates", date_range)
     .text("NoEarlierThan", start_time)
     .text("NoLaterThan", end_time);
+
+    if let Some(time_zone) = time_zone {
+        form = form.text("TimeZone", time_zone);
+    }
 
     let client = reqwest::blocking::Client::new();
     let resp = client.post( "https://www.when2meet.com/SaveNewEvent.php").multipart(form).send();
@@ -115,4 +127,11 @@ fn get_date_range(start_date: String, end_date: String) -> String {
     }
 
     dates.join("|")
+}
+
+fn get_tz_data() -> (Vec<String>, usize) {
+    let tz_vec: Vec<_> = tzdb::TZ_NAMES.into_iter().map(|tz| tz.to_string()).collect();
+    let local_tz_default = tzdb::local_tz().unwrap_or(tzdb::time_zone::GMT);
+    let local_tz_index = tz_vec.iter().position(|tz| tzdb::tz_by_name(tz).unwrap() == local_tz_default).unwrap_or(0);
+    (tz_vec, local_tz_index)
 }
